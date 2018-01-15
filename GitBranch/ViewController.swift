@@ -9,17 +9,42 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
+    @IBOutlet weak var labelMensagem: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        //Exibir msg na label
+        labelMensagem.text = mensage()
+        
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
-
-
+    
+    
+    //MARK: Methods
+    func mensage() -> String {
+        
+        //resgatar hora atual
+        let agora = Date()
+        
+        //Criar as datas de comparação
+        guard let meioDia = Calendar.current.date(bySettingHour: 12, minute: 00, second: 00, of: agora) else { return "" }
+        
+        guard let seisHoras = Calendar.current.date(bySettingHour: 18, minute: 00, second: 00, of: agora) else { return "" }
+        
+        //Comparações para definir mensagem
+        if agora >= meioDia && agora <= seisHoras {
+            return "Boa Tarde.."
+        } else if agora >= seisHoras {
+            return "Boa Noite..."
+        } else {
+            return "Bom Dia..."
+        }
+    }
+    
 }
 
